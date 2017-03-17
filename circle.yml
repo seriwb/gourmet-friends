@@ -1,0 +1,27 @@
+machine:
+  timezone: Asia/Tokyo
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - ~/docker
+  override:
+    - mkdir -p ~/docker
+    - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - sudo chmod +x /usr/local/bin/docker-compose
+
+database:
+  pre:
+    - mv config/database.yml.ci config/database.yml
+  override:
+    - bundle exec rake db:create db:schema:load RAILS_ENV=test
+    - bundle exec rake db:migrate RAILS_ENV=test
+
+test: 
+  pre:
+    - sudo docker-compose up -d
+  override:
+    - bundle exec rspec
