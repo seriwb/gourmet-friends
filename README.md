@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/seriwb/gourmet-friends.svg?style=svg)](https://circleci.com/gh/seriwb/gourmet-friends)
+[![Coverage Status](https://coveralls.io/repos/github/seriwb/gourmet-friends/badge.svg)](https://coveralls.io/github/seriwb/gourmet-friends)
+
 # ぐるめフレンズ
 
 すごーい！あなたはグルメなフレンズなんだね！
