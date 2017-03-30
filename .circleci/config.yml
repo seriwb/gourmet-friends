@@ -11,7 +11,6 @@ jobs:
       DOCKER_VER: 17.03.0-ce
 
     steps:
-      - checkout
       
 #      - run: mkdir -p $TEST_RESULTS
 
@@ -38,6 +37,8 @@ jobs:
 #      - run:
 #          name: Build service
 #          command: make
+
+      - checkout
 
       - run:
           name: Start container and verify it's working
