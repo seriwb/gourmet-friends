@@ -10,18 +10,21 @@ dependencies:
     - ~/docker
   override:
     - mkdir -p ~/docker
-    - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - sudo curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     - sudo chmod +x /usr/local/bin/docker-compose
 
 database:
-  pre:
-    - bundle install
+#  pre:
+#    - bundle install
   override:
-    - bundle exec rake db:create db:schema:load RAILS_ENV=test
-    - bundle exec rake db:migrate RAILS_ENV=test
+    - sudo docker-compose up -d
+    - sudo docker-compose run app bundle install
+#    - bundle exec rake db:create db:schema:load RAILS_ENV=test
+#    - bundle exec rake db:migrate RAILS_ENV=test
 
 test: 
-  pre:
-    - sudo docker-compose up -d
+#  pre:
+#    - sudo docker-compose up -d
+#    - docker-compose run app bundle install
   override:
-    - bundle exec rspec
+    - sudo docker-compose run app bundle exec rake test
