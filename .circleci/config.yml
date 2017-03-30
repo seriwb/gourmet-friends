@@ -18,8 +18,9 @@ jobs:
       - setup_remote_docker
 
       # This should go into custom primary image, here's only for the sake of explanation
-      - run: apt-get update && apt-get install -y \
-          curl \
+      - run: >
+          apt-get update && apt-get install -y
+          curl
           --no-install-recommends && rm -rf /var/lib/apt/lists/*
       - run:
           name: Install Docker client
